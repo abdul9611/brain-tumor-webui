@@ -73,15 +73,17 @@ def index():
                 height = abs(coords[3] - coords[1])
                 size_percent = (width * height) / (640 * 640) * 100  # assume 640x640 input
 
-                pdf.multi_cell(0, 10, f"Tumor Type: {label.title()}
-Tumor Location: Unknown
-Tumor Size: {size_percent:.1f}% of image
-Confidence Score: {conf:.2f}
-Priority Level: {'HIGH' if conf > 0.5 else 'LOW'}")
+                pdf.multi_cell(
+                    0, 10,
+                    f"Tumor Type: {label.title()}\n"
+                    f"Tumor Location: Unknown\n"
+                    f"Tumor Size: {size_percent:.1f}% of image\n"
+                    f"Confidence Score: {conf:.2f}\n"
+                    f"Priority Level: {'HIGH' if conf > 0.5 else 'LOW'}"
+                )
                 pdf.ln(10)
                 pdf.set_font("Arial", style="I", size=11)
-                pdf.multi_cell(0, 10, "Recommendation:
-Urgent referral to oncology. Advanced imaging required.")
+                pdf.multi_cell(0, 10, "Recommendation:\nUrgent referral to oncology. Advanced imaging required.")
             else:
                 pdf.cell(0, 10, "No tumor detected with high confidence.", ln=True)
 
